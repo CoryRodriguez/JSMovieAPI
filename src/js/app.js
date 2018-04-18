@@ -17,8 +17,18 @@ document.addEventListener('submit', (e) => {
       console.log(movie);
 
       output.innerHTML += `
-        <img src="${movie.Poster}" />
-        <h1>${movie.Title}</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <img src="${movie.Poster}" />
+          </div>
+          <div class="col-md-6">
+            <span class="display-4 mr-2">${movie.Title}</span>
+            <span>${movie.Rated}</span>
+            <p>${movie.Runtime}</p>
+            <p>${movie.Released}</p>
+            <p>${movie.Ratings.source}</p>
+          </div>
+        </div>
       `;
     })
     .catch(error => {
