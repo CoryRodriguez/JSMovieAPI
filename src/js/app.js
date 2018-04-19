@@ -4,9 +4,10 @@ const test = '300'
 const apiKey = '&apikey=82ed9809';
 const output = document.getElementById('output');
 
-
 document.addEventListener('submit', (e) => {
   e.preventDefault();
+
+
   let movieName = movieInput.value;
   const getMovie = `${url}${movieName}${apiKey}`
 
@@ -15,6 +16,7 @@ document.addEventListener('submit', (e) => {
     .then(data => {
       let movie = data;
       console.log(movie);
+      console.log(movie.Response);
 
       output.innerHTML += `
         <div class="row">
@@ -26,7 +28,9 @@ document.addEventListener('submit', (e) => {
             <span>${movie.Rated}</span>
             <p>${movie.Runtime}</p>
             <p>${movie.Released}</p>
-            <p>${movie.Ratings.source}</p>
+            <p>IMDB: ${movie.Ratings[0].Value}</p>
+            <p>Rotton Tomatoes: ${movie.Ratings[1].Value}</p>
+            <p>Metacritic: ${movie.Ratings[2].Value}</p>
           </div>
         </div>
       `;
@@ -37,3 +41,14 @@ document.addEventListener('submit', (e) => {
 
 });
 
+
+// function newSearch(){
+
+//   if (movie.Response !== False) {
+//     console.log('hi');
+//   } else {
+//     console.log('no');
+//   };
+// };
+
+// newSearch()
