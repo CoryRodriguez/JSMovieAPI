@@ -19,8 +19,13 @@ document.addEventListener('submit', (e) => {
     .then(data => {
       movie = data;
       console.log(movie);
-      console.log(movie.Error);
-      console.log(movie.Title);
+      console.log(movie.Released);
+
+      let date = movie.Released;
+      let date2 = date.split(' ');
+      let date3 = date2.unshift(date2.splice(1, 1)[0]);
+      let formattedDate = date2.join(' ');
+
 
       if (movieInput.value === '') {
         console.log('nothing here')
@@ -36,22 +41,20 @@ document.addEventListener('submit', (e) => {
         submitBtn.innerText = "Submit";
 
           if (movie.Title !== '') {
-          console.log('working');
           output.innerHTML = `
           <div class="row text-center">
             <div class="col-md-6">
               <img src="${movie.Poster}" />
             </div>
             <div class="col-md-6">
-              <div class="">
-                <span class="display-4 mr-2">${movie.Title}</span>
-                <span>(${movie.Rated})</span>
-                <p>${movie.Runtime}</p>
-                <p>${movie.Released}</p>
-                <p>IMDB: ${movie.Ratings[0].Value}</p>
-                <p>Rotten Tomatoes: ${movie.Ratings[1].Value}</p>
-                <p>Metacritic: ${movie.Ratings[2].Value}</p>
-              </div>
+              <span class="display-4 mr-2">${movie.Title}</span>
+              <span>(${movie.Rated})</span>
+              <p>${movie.Runtime}</p>
+              <p>${formattedDate}</p>
+              <div class="d-block"><img class="icon" src="../img/IMDb.png"></img> ${movie.Ratings[0].Value}</div>
+              <div class="d-block mb-1"><img class="icon" src="../img/RottenTomatoes.png"></img> ${movie.Ratings[1].Value}</div>
+              <div class="d-block my-2"><img class="icon" src="../img/Metacritic.svg.png"></img> ${movie.Ratings[2].Value}</div>
+              <p>Plot: ${movie.Plot}</p>
             </div>
           </div>
         `;
@@ -67,13 +70,3 @@ document.addEventListener('submit', (e) => {
 });
 
 
-// function newSearch(){
-
-//   if (movie.Response !== False) {
-//     console.log('hi');
-//   } else {
-//     console.log('no');
-//   };
-// };
-
-// newSearch()
