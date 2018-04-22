@@ -46,15 +46,25 @@ document.addEventListener('submit', (e) => {
             <div class="col-md-6">
               <img src="${movie.Poster}" />
             </div>
-            <div class="col-md-6">
-              <span class="display-4 mr-2">${movie.Title}</span>
-              <span>(${movie.Rated})</span>
-              <p>${movie.Runtime}</p>
-              <p>${formattedDate}</p>
+            <div class="col-md-6 text-left font-weight-bold">
+              <div class="mb-1">
+                <span class="display-4 font-weight-normal mr-2">${movie.Title}</span>
+                <span>(${movie.Rated})</span>
+              </div>
+              <span class="lead small">${formattedDate}</span> |
+              <span class="lead small">${movie.Genre}</span> |
+              <span class="lead small">${movie.Runtime}</span> 
+              
+              <hr>
+
+              <p class="mt-3">${movie.Plot}</p>
+              
+              <hr>
+
               <div class="d-block"><img class="icon" src="../img/IMDb.png"></img> ${movie.Ratings[0].Value}</div>
               <div class="d-block mb-1"><img class="icon" src="../img/RottenTomatoes.png"></img> ${movie.Ratings[1].Value}</div>
-              <div class="d-block my-2"><img class="icon" src="../img/Metacritic.svg.png"></img> ${movie.Ratings[2].Value}</div>
-              <p>Plot: ${movie.Plot}</p>
+              <div class="d-block my-2"><img class="icon mr-2" src="../img/Metacritic.svg.png"></img> ${movie.Ratings[2].Value}</div>
+
             </div>
           </div>
         `;
