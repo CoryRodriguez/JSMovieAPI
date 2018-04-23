@@ -5,21 +5,35 @@ const test = '300'
 const apiKey = '&apikey=82ed9809';
 const output = document.getElementById('output');
 
+let movieName = movieInput.value;
+
+
 let media;
 
 document.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  output.innerText = `${movieInput.value + 1}`;
+  getMovies(movieInput.value);
 
-  let movieName = movieInput.value;
+  if(movieName === ''){
+    movieInput.classList.add("is-invalid");
+    submitBtn.classList.remove("btn-dark");
+    submitBtn.classList.add("btn-danger");
+    submitBtn.innerText = "Try Again";
+  }
+});
+
+function getMovies(movieName){
+  // output.innerText = `${movieInput.value + 1}`;
+  //console.log(data.Response);
+
   const getMovie = `${url}${movieName}${apiKey}`
 
   fetch(getMovie)
     .then(res => res.json())
     .then(data => {
       movie = data;
-      console.log(movie);
+      console.log(data.Response.toLowerCase());
       console.log(movie.Released);
 
       let date = movie.Released;
@@ -28,16 +42,16 @@ document.addEventListener('submit', (e) => {
       let formattedDate = date2.join(' ');
 
 
-      if (movie.Response.toLowerCase() !== true) {
+      if (data.Response.toLowerCase() !== false) {
 
-        (console.log(movie.Response.toLowerCase()));
+        console.log(movie.Response.toLowerCase());
         movieInput.classList.remove("is-invalid");
         submitBtn.classList.add("btn-dark");
         submitBtn.classList.remove("btn-danger");
         submitBtn.innerText = "Submit";
 
         if (movie.Title !== '') {
-          console.log(String(movie.Response));
+          console.log(String(movie.Response.value));
           output.innerHTML = `
           <div class="row text-center">
             <div class="col-md-6">
@@ -81,20 +95,16 @@ document.addEventListener('submit', (e) => {
       } else {
 
         console.log('nothing here')
-        movieInput.classList.add("is-invalid");
-        submitBtn.classList.remove("btn-dark");
-        submitBtn.classList.add("btn-danger");
-        submitBtn.innerText = "Try Again";
-        output.innerHTML = 'no';
+
       }
-      
+
 
     })
     .catch(error => {
       console.log(JSON.stringify(error));
     }); 
 
-});
+};
 
 
 
