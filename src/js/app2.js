@@ -28,21 +28,15 @@ document.addEventListener('submit', (e) => {
       let formattedDate = date2.join(' ');
 
 
-      if(movieInput.value === '') {
-        console.log('nothing here')
-        movieInput.classList.add("is-invalid");
-        submitBtn.classList.remove("btn-dark");
-        submitBtn.classList.add("btn-danger");
-        submitBtn.innerText = "Try Again";
-        output.innerHTML = 'no';
-      } else {
+      if (movie.Response.toLowerCase() !== true) {
+
         (console.log(movie.Response.toLowerCase()));
         movieInput.classList.remove("is-invalid");
         submitBtn.classList.add("btn-dark");
         submitBtn.classList.remove("btn-danger");
         submitBtn.innerText = "Submit";
 
-          if (movie.Title !== '') {
+        if (movie.Title !== '') {
           console.log(String(movie.Response));
           output.innerHTML = `
           <div class="row text-center">
@@ -84,6 +78,14 @@ document.addEventListener('submit', (e) => {
           </div>
         `;
         };
+      } else {
+
+        console.log('nothing here')
+        movieInput.classList.add("is-invalid");
+        submitBtn.classList.remove("btn-dark");
+        submitBtn.classList.add("btn-danger");
+        submitBtn.innerText = "Try Again";
+        output.innerHTML = 'no';
       }
       
 
