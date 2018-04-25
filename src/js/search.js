@@ -22,26 +22,52 @@ document.addEventListener('submit', (e) => {
       let valid = data.Response.toLowerCase();
       console.log(data);
 
+      // console.log(data.Response.toLowerCase());
+      console.log(data.Search);      
+      console.log(data.Search[0].Title);
+
+      movieInput.classList.remove("is-invalid");
+      submitBtn.classList.add("btn-dark");
+      submitBtn.classList.remove("btn-danger");
+      submitBtn.innerText = "Submit";
+
+      for (let i = 0; i <= data.Search.length; i++){
+        console.log(data.Search[i].Title);
+      };
+
+
+      // NEED TO DO FOREACH ITERATION
+      output.innerHTML = `
+          <div class="row text-center">
+            <div class="col-md-3">
+              <p class="lead">${data.Search[i].Title}</p>
+              <img class="img-fluid" src="${data.Search[i].Poster}" />
+            </div>
+          </div>
+        `;
+
       // Format released date
       // let date = data.Released;
       // let date2 = date.split(' ');
       // let date3 = date2.unshift(date2.splice(1, 1)[0]);
       // let formattedDate = date2.join(' ');
 
+      // <span class="lead small">${formattedDate}</span> |
 
-      if (data !== true) {
-        console.log('something here')
+
+      // if (data !== true) {
+      //   console.log('something here')
        
-      } else {
+      // } else {
 
-        console.log('nothing here')
+      //   console.log('nothing here')
 
-        movieInput.classList.add("is-invalid");
-        submitBtn.classList.remove("btn-dark");
-        submitBtn.classList.add("btn-danger");
-        submitBtn.innerText = "Try Again";
+      //   movieInput.classList.add("is-invalid");
+      //   submitBtn.classList.remove("btn-dark");
+      //   submitBtn.classList.add("btn-danger");
+      //   submitBtn.innerText = "Try Again";
 
-      }
+      // }
 
 
     })
@@ -55,52 +81,7 @@ document.addEventListener('submit', (e) => {
 
 function getMovies(movieName){
 
-  console.log(data.Response.toLowerCase());
-  console.log(data.Search);
-  movieInput.classList.remove("is-invalid");
-  submitBtn.classList.add("btn-dark");
-  submitBtn.classList.remove("btn-danger");
-  submitBtn.innerText = "Submit";
-
-  output.innerHTML = `
-          <div class="row text-center">
-            <div class="col-md-6">
-              <img src="${data.Search[0].Poster}" />
-            </div>
-            <div class="col-md-6 text-left font-weight-bold">
-              <div class="mb-1">
-                <span class="display-4 font-weight-normal mr-2">${data.Title}</span>
-                <span>(${data.Rated})</span>
-              </div>
-              <span class="lead small">${formattedDate}</span> |
-              <span class="lead small">${data.Genre}</span> |
-              <span class="lead small">${data.Runtime}</span> 
-              
-              <hr>
-
-              <p class="mt-3">${data.Plot}</p>
-              
-              <hr>
-
-              <div class="row text-center">
-                <div class="col-sm-4">
-                  <img class="icon" src="../img/IMDb.png"></img>
-                  <h4 class="">${data.Ratings[0].Value}</h4>
-                </div>
-                <div class="col-sm-4">
-                  <img class="icon" src="../img/RottenTomatoes.png"></img>
-                  <h4>${data.Ratings[1].Value}</h4>
-                </div>
-                <div class="col-sm-4">
-                  <img class="icon mr-2" src="../img/Metacritic.svg.png"></img>
-                  <h4>${data.Ratings[2].Value}</h4>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-        `;
+  
   
 
 };
