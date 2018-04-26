@@ -31,25 +31,38 @@ document.addEventListener('submit', (e) => {
       submitBtn.classList.remove("btn-danger");
       submitBtn.innerText = "Submit";
 
-      for (let i = 0; i <= data.Search.length; i++){
-        console.log(data.Search[i].Title);
-        output.innerHTML += `
+      // for (let i = 0; i <= data.Search.length; i++){
+      //   // console.log(data.Search[i].Title);
+      //   output.innerHTML += `
           
    
-          <div class="col-6 col-md-4 col-lg-3 card-group">
+      //     <div class="col-12 col-sm-6 col-md-4 col-lg-3 card-group">
+      //       <div class="card bg-dark mb-4">
+      //         <img class="card-img-top" src="${data.Search[i].Poster}">
+      //         <div class="card-body d-flex flex-column">
+      //           <h4 class="card-title mt-auto">${data.Search[i].Title}</h4>
+      //           <button type="button" class="mt-auto btn btn-block btn-secondary">Details</button>
+      //         </div>
+      //       </div>
+      //     </div>
+      //   `;
+      // };
+
+
+      // NEED TO DO FOREACH ITERATION
+      data.Search.forEach((x)=>{
+        output.innerHTML = `
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3 card-group">
             <div class="card bg-dark mb-4">
-              <img class="card-img-top" src="${data.Search[i].Poster}">
+              <img class="card-img-top" src="${x.Poster}">
               <div class="card-body d-flex flex-column">
-                <h4 class="card-title mt-auto">${data.Search[i].Title}</h4>
+                <h4 class="card-title mt-auto">${x.Title}</h4>
                 <button type="button" class="mt-auto btn btn-block btn-secondary">Details</button>
               </div>
             </div>
           </div>
-        `;
-      };
-
-
-      // NEED TO DO FOREACH ITERATION
+        `;     
+     });
 
 
       // Format released date
