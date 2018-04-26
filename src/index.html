@@ -11,17 +11,20 @@
   <title>Bootstrap 4 Starter Pack</title>
 </head>
 
-<body>
+<body class="bg-warning">
 
   <div class="container text-center">
-    <h1 class="mt-5 mb-3 display-2">OMDB</h1>
+    <h1 class="mt-5 mb-3 display-2 text-dark">OMDB</h1>
     <form class="form-inline justify-content-center">
       <div class="form-group">
         <input id="movieName" class="form-control" type="text" placeholder="Movie Name">
       </div>
       <button id="submitBtn" class="btn btn-dark" type="submit">Submit</button>
     </form>
-    <div id="output" class="mt-5 text-left"></div>
+    <div class="mt-5 text-center">
+      <div id="output" class="row">
+      </div>
+    </div>
   </div>
 
   <script src="js/jquery.min.js"></script>

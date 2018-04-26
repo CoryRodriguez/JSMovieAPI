@@ -33,18 +33,24 @@ document.addEventListener('submit', (e) => {
 
       for (let i = 0; i <= data.Search.length; i++){
         console.log(data.Search[i].Title);
+        output.innerHTML += `
+          
+   
+          <div class="col-6 col-md-4 col-lg-3 card-group">
+            <div class="card bg-dark mb-4">
+              <img class="card-img-top" src="${data.Search[i].Poster}">
+              <div class="card-body d-flex flex-column">
+                <h4 class="card-title mt-auto">${data.Search[i].Title}</h4>
+                <button type="button" class="mt-auto btn btn-block btn-secondary">Details</button>
+              </div>
+            </div>
+          </div>
+        `;
       };
 
 
       // NEED TO DO FOREACH ITERATION
-      output.innerHTML = `
-          <div class="row text-center">
-            <div class="col-md-3">
-              <p class="lead">${data.Search[i].Title}</p>
-              <img class="img-fluid" src="${data.Search[i].Poster}" />
-            </div>
-          </div>
-        `;
+
 
       // Format released date
       // let date = data.Released;
