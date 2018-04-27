@@ -10,26 +10,20 @@ let movieName = movieInput.value;
 let media;
 
 document.addEventListener('submit', (e) => {
+
+  if (movieInput.value === ''){
+    submitBtn.classList = 'btn btn-danger';
+    submitBtn.innerText = `Try Again`;
+  } else {
+    output.innerHTML = '';
+    getMovies(movieName);
+  }
+
+
+
   e.preventDefault();
 
-  const getMovie = `${url}${movieInput.value}${apiKey}`
 
-
-  fetch(getMovie)
-    .then(res => res.json())
-    .then(data => {
-      
-      let valid = data.Response.toLowerCase();
-      console.log(data);
-
-      // console.log(data.Response.toLowerCase());
-      console.log(data.Search);      
-      console.log(data.Search[0].Title);
-
-      movieInput.classList.remove("is-invalid");
-      submitBtn.classList.add("btn-dark");
-      submitBtn.classList.remove("btn-danger");
-      submitBtn.innerText = "Submit";
 
       // for (let i = 0; i <= data.Search.length; i++){
       //   // console.log(data.Search[i].Title);
@@ -49,20 +43,7 @@ document.addEventListener('submit', (e) => {
       // };
 
 
-      // NEED TO DO FOREACH ITERATION
-      data.Search.forEach((x)=>{
-        output.innerHTML = `
-          <div class="col-12 col-sm-6 col-md-4 col-lg-3 card-group">
-            <div class="card bg-dark mb-4">
-              <img class="card-img-top" src="${x.Poster}">
-              <div class="card-body d-flex flex-column">
-                <h4 class="card-title mt-auto">${x.Title}</h4>
-                <button type="button" class="mt-auto btn btn-block btn-secondary">Details</button>
-              </div>
-            </div>
-          </div>
-        `;     
-     });
+
 
 
       // Format released date
@@ -88,21 +69,62 @@ document.addEventListener('submit', (e) => {
 
       // }
 
+});
+
+function getMovies(movieName){
+
+  const getMovie = `${url}${movieInput.value}${apiKey}`
+
+
+  fetch(getMovie)
+    .then(res => res.json())
+    .then(data => {
+
+      let valid = data.Response.toLowerCase();
+      console.log(data);
+
+      // console.log(data.Response.toLowerCase());
+      console.log(data.Search);
+      console.log(data.Search[0].Title);
+
+      movieInput.classList.remove("is-invalid");
+      submitBtn.classList.add("btn-dark");
+      submitBtn.classList.remove("btn-danger");
+      submitBtn.innerText = "Submit";
+
+      if(data.Search.Poster === "NA"){
+        console.log('remove');
+      }
+  
+  // NEED TO DO FOREACH ITERATION
+  data.Search.forEach((x) => {
+    output.innerHTML += `
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3 card-group">
+            <div class="card bg-dark mb-4">
+              <img class="card-img-top" src="${x.Poster}">
+              <div class="card-body d-flex flex-column">
+                <h4 class="card-title mt-auto">${x.Title}</h4>
+                <button type="button" class="mt-auto btn btn-block btn-secondary">Details</button>
+              </div>
+            </div>
+          </div>
+        `;
+  });
 
     })
     .catch(error => {
       console.log(error);
     }); 
 
+};
 
 
-});
+function noImg(){
+  // splice movie from array if there's no poster
 
-function getMovies(movieName){
-
-  
-  
-
+  if (data.Search.Poster === "NA") {
+    console.log('remove');
+  }
 };
 
 
