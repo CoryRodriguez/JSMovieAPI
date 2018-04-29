@@ -135,17 +135,17 @@ function getMovie() {
     .then(res => res.json())
     .then(data => {
 
+      console.log(data);
+
       //Format released date
       let date = data.Released;
       let date2 = date.split(' ');
       let date3 = date2.unshift(date2.splice(1, 1)[0]);
       let formattedDate = date2.join(' ');
-      
 
+      //console.log(ratings.Value);
 
-
-      console.log(data);
-      let part1 = singleMovie.innerHTML = `
+        singleMovie.innerHTML = `
           <div class="row text-center text-dark">
             <div class="col-md-6">
               <img src="${data.Poster}" />
@@ -165,32 +165,37 @@ function getMovie() {
               
               <hr>
 
-              <div class="row text-center">
-              `;
+              <div class="row text-center">` 
+              +
 
-      let part2 = data.Ratings.forEach((x) => {
-        let rating;
+          testing();
+              `
 
-        for (i = 0; i < data.Ratings.length; i++) {
-          //console.log(data.Ratings[i].Value);
-        }
-        singleMovie.innerHTML += `
-        
-          <div class="col-sm-4">
-            <img class="icon" src="../img/IMDb.png"></img>
-            <h4 class="">${data.Ratings[x]}</h4>
+              `
+              +
+
+
+    //       data.Ratings.forEach((x) => {
+    //         let ratingsLength = data.Ratings.length;
+    //         for (let i = 0; i < ratingsLength; i++) {
+    //           console.log(data.Ratings[i].Value);
+    //           singleMovie.innerHTML += `
+    //       <div class="col-sm-4">
+    //         <img class="icon" src="../img/IMDb.png"></img>
+    //         <h4 class="">${data.Ratings[i].Value}</h4>
+    //       </div>
+    // `;
+    //         }
+    //       });
+
+
+              +
+              `
+              </div>
+            </div>
           </div>
-    `;
-
-
-      let part3 = singleMovie.innerHTML += `
-        </div>
-      </div>
-    </div>
-    `;
-      })
-
-        
+          `;
+      
     })
     .catch(error => {
       console.log(error);
@@ -205,6 +210,40 @@ function noImg(){
   }
 };
 
+
+function testing(){
+  let movieId = sessionStorage.getItem('movieId');
+  let singleURL = `http://www.omdbapi.com/?i=${movieId}${apiKey}`
+
+
+
+  fetch(singleURL)
+    .then(res => res.json())
+    .then(data => {
+
+
+  for (let i = 0; i < data.Ratings.length; i++) {
+    console.log(data.Ratings[i].Value);
+    singleMovie.innerHTML += `
+          <div class="col-sm-4">`
+          +
+          console.log(imageLoop());
+          +
+          `
+            <h4 class="">${data.Ratings[i].Value}</h4>
+          </div>
+    `;
+}})};
+testing();
+
+
+function imageLoop(){
+  let ratingImage = ['IMDb.png', 'RottenTomatoes.png', 'Metacritic.svg.png'];
+
+  for (let j = 0; j < ratingImage.length; j++) {
+    `<img class="icon" src="../img/${ratingImage[j]}"></img>`
+  };
+};
 
 
 
