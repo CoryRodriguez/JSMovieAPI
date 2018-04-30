@@ -168,7 +168,7 @@ function getMovie() {
               <div class="row text-center">` 
               +
 
-          testing();
+              makeFunc();
               `
 
               `
@@ -210,6 +210,18 @@ function noImg(){
   }
 };
 
+let funcs = []
+
+function makeFunc(i){
+  return function(){
+    return i;
+  } ();
+}
+
+// for(var i = 0; i < 4; i++){
+//   funcs[i] = makeFunc(i);
+//   console.log(i);
+// };
 
 function testing(){
   let movieId = sessionStorage.getItem('movieId');
@@ -223,18 +235,21 @@ function testing(){
 
 
   for (let i = 0; i < data.Ratings.length; i++) {
-    console.log(data.Ratings[i].Value);
+    funcs[data.Ratings[i].Value] = makeFunc(data.Ratings[i].Value);
+    //console.log(i);
+
     singleMovie.innerHTML += `
           <div class="col-sm-4">`
           +
-          console.log(imageLoop());
+          //console.log(imageLoop());
           +
           `
             <h4 class="">${data.Ratings[i].Value}</h4>
           </div>
     `;
+
+
 }})};
-testing();
 
 
 function imageLoop(){
