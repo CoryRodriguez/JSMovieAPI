@@ -99,7 +99,6 @@ function getMovies(movieName){
   
   // NEED TO DO FOREACH ITERATION
   data.Search.forEach((x) => {
-    debugger;
     if(x.Poster=="N/A"){
       return;
     }
