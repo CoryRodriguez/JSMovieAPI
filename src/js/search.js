@@ -30,7 +30,7 @@ document.addEventListener('submit', (e) => {
       //   // console.log(data.Search[i].Title);
       //   output.innerHTML += `
           
-   
+  
       //     <div class="col-12 col-sm-6 col-md-4 col-lg-3 card-group">
       //       <div class="card bg-dark mb-4">
       //         <img class="card-img-top" src="${data.Search[i].Poster}">
@@ -58,7 +58,7 @@ document.addEventListener('submit', (e) => {
 
       // if (data !== true) {
       //   console.log('something here')
-       
+
       // } else {
 
       //   console.log('nothing here')
@@ -99,6 +99,10 @@ function getMovies(movieName){
   
   // NEED TO DO FOREACH ITERATION
   data.Search.forEach((x) => {
+    debugger;
+    if(x.Poster=="N/A"){
+      return;
+    }
     output.innerHTML += `
           <div class="col-12 col-sm-6 col-md-4 col-lg-3 card-group">
             <div class="card bg-dark mb-4">
@@ -110,6 +114,10 @@ function getMovies(movieName){
             </div>
           </div>
         `;
+        // if(x.Poster === "N/A"){
+        //   console.log('works');
+        //   output.innerHTML.classList.add(" d-none");
+        // };
   });
 
     })
@@ -144,8 +152,7 @@ function getMovie() {
       let formattedDate = date2.join(' ');
 
       //console.log(ratings.Value);
-
-        singleMovie.innerHTML = `
+      let innerHTML = `
           <div class="row text-center text-dark">
             <div class="col-md-6">
               <img src="${data.Poster}" />
@@ -153,7 +160,7 @@ function getMovie() {
             <div class="col-md-6 text-left font-weight-bold">
               <div class="mb-1">
                 <span class="display-4 font-weight-normal mr-2">${data.Title}</span>
-                <span>(${data.Rated})</span>
+                <span id="rating">(${data.Rated})</span>
               </div>
               <span class="lead small">${formattedDate}</span> |
               <span class="lead small">${data.Genre}</span> |
@@ -165,14 +172,18 @@ function getMovie() {
               
               <hr>
 
-              <div class="row text-center">` 
-              +
+              <div class="row text-center">
+              `;
+      let type = ['IMDb.png', 'RottenTomatoes.png','Metacritic.png'];
+      for (var i = 0; i < data.Ratings.length; i++){
+        innerHTML += `<div class="col">
+                        <img class="icon" src="../img/${type[i]}"></img>
+                        <h4 class="">${data.Ratings[i].Value}</h4>
+                      </div>`;
+      }
+      innerHTML += `</div>`;
 
-              makeFunc();
-              `
-
-              `
-              +
+        singleMovie.innerHTML = innerHTML;
 
 
     //       data.Ratings.forEach((x) => {
@@ -187,14 +198,10 @@ function getMovie() {
     // `;
     //         }
     //       });
-
-
-              +
-              `
-              </div>
-            </div>
-          </div>
-          `;
+;
+        if(data.Rated === "N/A"){
+          document.getElementById('rating').innerText = "(Unrated)";
+        };
       
     })
     .catch(error => {

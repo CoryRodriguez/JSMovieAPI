@@ -22,3 +22,6 @@ input:-webkit-autofill {
 .lead {
   font-size: 1.30rem;
   font-weight: 400; }
+
+a:hover {
+  text-decoration: none; }
