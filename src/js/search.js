@@ -1,7 +1,6 @@
 const movieInput = document.getElementById('movieName');
 const submitBtn = document.getElementById('submitBtn');
 const url = 'http://www.omdbapi.com/?s=';
-const test = '300'
 const apiKey = '&apikey=82ed9809';
 const output = document.getElementById('output');
 const singleMovie = document.getElementById('singleMovie');
@@ -20,56 +19,7 @@ document.addEventListener('submit', (e) => {
     getMovies(movieName);
   }
 
-
-
   e.preventDefault();
-
-
-
-      // for (let i = 0; i <= data.Search.length; i++){
-      //   // console.log(data.Search[i].Title);
-      //   output.innerHTML += `
-          
-  
-      //     <div class="col-12 col-sm-6 col-md-4 col-lg-3 card-group">
-      //       <div class="card bg-dark mb-4">
-      //         <img class="card-img-top" src="${data.Search[i].Poster}">
-      //         <div class="card-body d-flex flex-column">
-      //           <h4 class="card-title mt-auto">${data.Search[i].Title}</h4>
-      //           <button type="button" class="mt-auto btn btn-block btn-secondary">Details</button>
-      //         </div>
-      //       </div>
-      //     </div>
-      //   `;
-      // };
-
-
-
-
-
-      // Format released date
-      // let date = data.Released;
-      // let date2 = date.split(' ');
-      // let date3 = date2.unshift(date2.splice(1, 1)[0]);
-      // let formattedDate = date2.join(' ');
-
-      // <span class="lead small">${formattedDate}</span> |
-
-
-      // if (data !== true) {
-      //   console.log('something here')
-
-      // } else {
-
-      //   console.log('nothing here')
-
-      //   movieInput.classList.add("is-invalid");
-      //   submitBtn.classList.remove("btn-dark");
-      //   submitBtn.classList.add("btn-danger");
-      //   submitBtn.innerText = "Try Again";
-
-      // }
-
 });
 
 function getMovies(movieName){
@@ -113,10 +63,6 @@ function getMovies(movieName){
             </div>
           </div>
         `;
-        // if(x.Poster === "N/A"){
-        //   console.log('works');
-        //   output.innerHTML.classList.add(" d-none");
-        // };
   });
 
     })
@@ -147,17 +93,16 @@ function getMovie() {
       //Format released date
       let date = data.Released;
       let date2 = date.split(' ');
-      let date3 = date2.unshift(date2.splice(1, 1)[0]);
+      let date3 = date2.unshift(date2.splice(1, 1) [0] + '.');
       let formattedDate = date2.join(' ');
 
-      //console.log(ratings.Value);
       let innerHTML = `
           <div class="row text-center text-dark">
             <div class="col-md-6">
               <img src="${data.Poster}" />
             </div>
             <div class="col-md-6 text-left font-weight-bold">
-              <div class="mb-1">
+              <div class="mb-4">
                 <span class="display-4 font-weight-normal mr-2">${data.Title}</span>
                 <span id="rating">(${data.Rated})</span>
               </div>
@@ -165,11 +110,11 @@ function getMovie() {
               <span class="lead small">${data.Genre}</span> |
               <span class="lead small">${data.Runtime}</span> 
               
-              <hr>
+              <hr class="my-4">
 
               <p class="mt-3">${data.Plot}</p>
               
-              <hr>
+              <hr class="my-4">
 
               <div class="row text-center">
               `;
@@ -183,20 +128,6 @@ function getMovie() {
       innerHTML += `</div>`;
 
         singleMovie.innerHTML = innerHTML;
-
-
-    //       data.Ratings.forEach((x) => {
-    //         let ratingsLength = data.Ratings.length;
-    //         for (let i = 0; i < ratingsLength; i++) {
-    //           console.log(data.Ratings[i].Value);
-    //           singleMovie.innerHTML += `
-    //       <div class="col-sm-4">
-    //         <img class="icon" src="../img/IMDb.png"></img>
-    //         <h4 class="">${data.Ratings[i].Value}</h4>
-    //       </div>
-    // `;
-    //         }
-    //       });
 ;
         if(data.Rated === "N/A"){
           document.getElementById('rating').innerText = "(Unrated)";
@@ -207,56 +138,6 @@ function getMovie() {
       console.log(error);
     }); 
 }
-
-function noImg(){
-  // splice movie from array if there's no poster
-
-  if (data.Search.Poster === "NA") {
-    console.log('remove');
-  }
-};
-
-let funcs = []
-
-function makeFunc(i){
-  return function(){
-    return i;
-  } ();
-}
-
-// for(var i = 0; i < 4; i++){
-//   funcs[i] = makeFunc(i);
-//   console.log(i);
-// };
-
-function testing(){
-  let movieId = sessionStorage.getItem('movieId');
-  let singleURL = `http://www.omdbapi.com/?i=${movieId}${apiKey}`
-
-
-
-  fetch(singleURL)
-    .then(res => res.json())
-    .then(data => {
-
-
-  for (let i = 0; i < data.Ratings.length; i++) {
-    funcs[data.Ratings[i].Value] = makeFunc(data.Ratings[i].Value);
-    //console.log(i);
-
-    singleMovie.innerHTML += `
-          <div class="col-sm-4">`
-          +
-          //console.log(imageLoop());
-          +
-          `
-            <h4 class="">${data.Ratings[i].Value}</h4>
-          </div>
-    `;
-
-
-}})};
-
 
 function imageLoop(){
   let ratingImage = ['IMDb.png', 'RottenTomatoes.png', 'Metacritic.svg.png'];
