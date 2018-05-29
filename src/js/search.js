@@ -49,7 +49,7 @@ function getMovies(movieName){
   
   // NEED TO DO FOREACH ITERATION
   data.Search.forEach((x) => {
-    if(x.Poster=="N/A"){
+    if(x.Poster === "N/A"){
       return;
     }
     output.innerHTML += `
@@ -95,6 +95,7 @@ function getMovie() {
       let date2 = date.split(' ');
       let date3 = date2.unshift(date2.splice(1, 1) [0] + '.');
       let formattedDate = date2.join(' ');
+      console.log(formattedDate.split('') + 's');
 
       let innerHTML = `
           <div class="row text-center text-dark">
@@ -139,13 +140,7 @@ function getMovie() {
     }); 
 }
 
-function imageLoop(){
-  let ratingImage = ['IMDb.png', 'RottenTomatoes.png', 'Metacritic.svg.png'];
 
-  for (let j = 0; j < ratingImage.length; j++) {
-    `<img class="icon" src="../img/${ratingImage[j]}"></img>`
-  };
-};
 
 
 
