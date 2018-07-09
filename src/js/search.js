@@ -94,8 +94,13 @@ function getMovie() {
       let date = data.Released;
       let date2 = date.split(' ');
       let date3 = date2.unshift(date2.splice(1, 1) [0] + '.');
+      //let formattedDate = date2.join(' ');
+
       let formattedDate = date2.join(' ');
-      console.log(formattedDate.split('') + 's');
+      // let ddate = formattedDate.split('').splice(7, 1)[0] + ',';
+      // console.log(formattedDate.split('')).splice(7, 1)[0] + ',');
+      // let date4 = formattedDate.split('');
+      // console.log(date4.splice(7, 1) + 'tt');
 
       let innerHTML = `
           <div class="row text-center text-dark">
